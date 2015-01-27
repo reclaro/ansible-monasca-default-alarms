@@ -1,0 +1,15 @@
+- name: Nova Alarm definitions
+  monasca_alarm_definition:
+    name: "{{item.name}}"
+    expression: "{{item.expression}}"
+    keystone_token: "{{default_notification.keystone_token}}"
+    match_by: "{{item.match_by | default(['hostname']) }}"
+    monasca_api_url: "{{default_notification.monasca_api_url}}"
+    alarm_actions:
+      - "{{default_notification.notification_method_id}}"
+    ok_actions:
+      - "{{default_notification.notification_method_id}}"
+    undetermined_actions:
+      - "{{default_notification.notification_method_id}}"
+  with_items:
+    - { name: "VM Cpu usage", expression: "cpu.utilization_perc > 90 times 3", match_by: [resource_id]}

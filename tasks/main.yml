@@ -1,0 +1,15 @@
+---
+- name: Setup default email notification method
+  monasca_notification_method:
+    name: "Default Email"
+    type: 'EMAIL'
+    address: "{{default_email}}"
+    keystone_url: "{{keystone_url}}"
+    keystone_user: "{{keystone_user}}"
+    keystone_password: "{{keystone_password}}"
+  register: default_notification
+
+# Include the various alarm sets
+- include: system.yml tags=system_alarms
+- include: monasca.yml tags=monasca_alarms
+- include: openstack.yml tags=openstack_alarms
