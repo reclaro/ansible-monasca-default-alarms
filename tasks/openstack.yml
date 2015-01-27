@@ -12,4 +12,4 @@
     undetermined_actions:
       - "{{default_notification.notification_method_id}}"
   with_items:
-    - { name: "VM Cpu usage", expression: "cpu.utilization_perc > 90 times 3", match_by: [resource_id]}
+    - { name: "VM Cpu usage", expression: "avg(cpu.utilization_perc) > 90 times 3", match_by: [resource_id] }

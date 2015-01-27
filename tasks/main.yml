@@ -7,6 +7,10 @@
     keystone_url: "{{keystone_url}}"
     keystone_user: "{{keystone_user}}"
     keystone_password: "{{keystone_password}}"
+  tags:
+    - system_alarms
+    - monasca_alarms
+    - openstack_alarms
   register: default_notification
 
 # Include the various alarm sets
