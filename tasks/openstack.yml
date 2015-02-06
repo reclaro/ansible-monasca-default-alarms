@@ -15,3 +15,19 @@
       - "{{default_notification.notification_method_id}}"
   with_items:
     - { name: "VM Cpu usage", description: "CPU usage of a libvirt vm", expression: "avg(cpu.utilization_perc) > 90 times 3", match_by: [resource_id] }
+    - { name: "Rabbitmq Queue Depth",
+        description: "Alarm on many messages in the queue",
+        expression: "avg(rabbitmq.queue.messages) > 10 times 3",
+        severity: "MEDIUM",
+        match_by: [queue, hostname]}
+    - { name: "Mysql Slow queries",
+        description: "Alert when many slow queries are reported",
+        expression: "avg(mysql.performance.slow_queries) > 10 times 3"}
+    - { name: "Apache status",
+        description: "Alarms on failure to reach the Apache status url",
+        expression: "apache.status > 0",
+        severity: "HIGH"}
+    - { name: "Apache no idle workers",
+        description: "Alarms when there are no idle apache workers",
+        expression: "avg(apache.performance.idle_worker_count) < 1 times 3",
+        severity: "MEDIUM"}
