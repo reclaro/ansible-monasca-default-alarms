@@ -30,4 +30,4 @@
         description: "Alarms when there are no idle apache workers",
         expression: "avg(apache.performance.idle_worker_count) < 1 times 3",
         severity: "MEDIUM"}
-    - { name: "NTP time sync", description: "Alarms when ntp falls out of sync", expression: "ntp.in_sync > 0"}
+    - { name: "NTP time sync", description: "Alarms when ntp falls 5 seconds out of sync", expression: "ntp.offset > 5 or ntp.offset < 5"}
