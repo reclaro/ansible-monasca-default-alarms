@@ -29,6 +29,19 @@ By default the configured alarms will be setup with a notification to root@local
       roles:
         - {role: monasca-default-alarms, tags: [alarms]}
 
+## Modules included in Library
+The library directory is for Ansible modules used by this project.
+
+The modules are maintained in a separate git repo and added here using
+[git-subtree](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt). For example to setup initially:
+
+    git subtree add --prefix library https://github.com/hpcloud-mon/ansible-module-monasca.git master --squash
+
+Then to update:
+
+    git subtree pull --prefix library https://github.com/hpcloud-mon/ansible-module-monasca.git master --squash
+
+
 ##License
 Apache
 
