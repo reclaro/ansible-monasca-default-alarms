@@ -52,22 +52,10 @@ options:
         choices: [ present, absent ]
         description:
             - Whether the account should exist.  When C(absent), removes the user account.
-    hookmethod:
-        required: true
-        description:
-            - The webhook method. This must be one of the types supported by the Monasca API.
     type:
         required: true
         description:
             - The notification type. This must be one of the types supported by the Monasca API.
-    hookheaders:
-        required: false
-        description:
-            - The webhook headers.
-    hookbody:
-        required: false
-        description:
-            - The webhook body.
 '''
 
 EXAMPLES = '''
@@ -76,9 +64,6 @@ EXAMPLES = '''
     name: "Email Root"
     type: 'EMAIL'
     address: 'root@localhost'
-    hookmethod: 'NOTSET'
-    hookheaders: ''
-    hookbody: ''
     keystone_url: "{{keystone_url}}"
     keystone_user: "{{keystone_user}}"
     keystone_password: "{{keystone_password}}"
@@ -154,9 +139,6 @@ class MonascaNotification(MonascaAnsible):
         name = self.module.params['name']
         type = self.module.params['type']
         address = self.module.params['address']
-        hookmethod = self.module.params['hookmethod']
-        hookheaders = self.module.params['hookheaders']
-        hookbody = self.module.params['hookbody']
 
         notifications = {notif['name']:notif for notif in self.monasca.notifications.list()}
         if name in notifications.keys():
@@ -172,16 +154,14 @@ class MonascaNotification(MonascaAnsible):
                 self._exit_json(changed=True)
         else:  # Only other option is present
             if notification is None:
-                body = self.monasca.notifications.create(name=name, type=type, address=address, hookmethod=hookmethod,
-                                                         hookheaders=hookheaders, hookbody=hookbody)
+                body = self.monasca.notifications.create(name=name, type=type, address=address)
                 self._exit_json(changed=True, notification_method_id=body['id'])
             else:
                 if notification['type'] == type and notification['address'] == address:
                     self._exit_json(changed=False, notification_method_id=notification['id'])
                 else:
                     self.monasca.notifications.update(notification_id=notification['id'],
-                                                      name=name, type=type, address=address, hookmethod=hookmethod,
-                                                      hookheaders=hookheaders, hookbody=hookbody)
+                                                      name=name, type=type, address=address)
                     self._exit_json(changed=True, notification_method_id=notification['id'])
 
 
