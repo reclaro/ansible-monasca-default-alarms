@@ -17,8 +17,8 @@
     - { name: "Host Alive Alarm", severity: "HIGH", expression: "host_alive_status > 0"}
     - { name: "Http Status Alarm", severity: "HIGH", expression: "http_status > 0", match_by: ["service", "hostname"] }
     - { name: "High CPU usage", expression: "avg(cpu.idle_perc) < 10 times 3" }
-    - { name: "Disk Inode Usage", expression: "disk.inode_used_perc > 90" }
-    - { name: "Disk Usage", expression: "disk.space_used_perc > 90" }
+    - { name: "Disk Inode Usage", expression: "disk.inode_used_perc > 90", match_by: ["hostname", "device"] }
+    - { name: "Disk Usage", expression: "disk.space_used_perc > 90", match_by: ["hostname", "device"] }
     - { name: "Memory usage", severity: "MEDIUM", expression: "avg(mem.usable_perc) < 10 times 3" }
     - { name: "Network Errors", severity: "MEDIUM", expression: "net.in_errors >5 or net.out_errors > 5" }
     - { name: "Process not found",
