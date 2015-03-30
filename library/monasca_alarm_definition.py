@@ -46,6 +46,10 @@ options:
         required: false
         description:
             - Keystone user to log in as, required unless a keystone_token is specified.
+    keystone_project:
+        required: false
+        description:
+            - Keystone project name to obtain a token for, defaults to the user's default project
     match_by:
         required: false
         default: "[hostname]"
@@ -141,7 +145,8 @@ class MonascaAnsible(object):
         if self.module.params['keystone_token'] is None:
             ks = ksclient.KSClient(auth_url=self.module.params['keystone_url'],
                                    username=self.module.params['keystone_user'],
-                                   password=self.module.params['keystone_password'])
+                                   password=self.module.params['keystone_password'],
+                                   project_name=self.module.params['keystone_project'])
 
             self.token = ks.token
             if self.module.params['monasca_api_url'] is None:
@@ -214,6 +219,7 @@ def main():
             keystone_token=dict(required=False, type='str'),
             keystone_url=dict(required=False, type='str'),
             keystone_user=dict(required=False, type='str'),
+            keystone_project=dict(required=False, type='str'),
             match_by=dict(default=['hostname'], type='list'),
             monasca_api_url=dict(required=False, type='str'),
             name=dict(required=True, type='str'),

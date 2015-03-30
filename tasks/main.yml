@@ -7,6 +7,7 @@
     keystone_url: "{{keystone_url}}"
     keystone_user: "{{keystone_user}}"
     keystone_password: "{{keystone_password}}"
+    keystone_project: "{{keystone_project}}"
   tags:
     - system_alarms
     - monasca_alarms
