@@ -15,4 +15,4 @@
       - "{{default_notification.notification_method_id}}"
   with_items:
     - { name: "VM Cpu usage", description: "CPU usage of a libvirt vm", expression: "avg(cpu.utilization_perc) > 90 times 3", match_by: [resource_id] }
-    - { name: "Swift Health", description: "Runs a variety of swift diagnostics", expression: "swift.health > 0"}
+    - { name: "Swift Health", description: "Basic swift healthcheck.", expression: "swift.healthcheck > 0"}  # Numerous other swift health checks exist but no alarms are defined in the default set
