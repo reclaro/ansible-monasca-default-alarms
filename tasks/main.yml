@@ -1,4 +1,8 @@
 ---
+- name: Use the venv python to run these modules
+  set_fact:
+    ansible_python_interpreter: "{{monasca_virtualenv_dir}}"/bin/python
+
 - name: Setup default email notification method
   monasca_notification_method:
     name: "Default Email"

@@ -1,3 +1,4 @@
 ---
 default_email: root@localhost
 keystone_project:
+monasca_virtualenv_dir: /opt/monasca
