@@ -109,15 +109,20 @@ EXAMPLES = '''
 
 from ansible.module_utils.basic import *
 
-# In many installs the python-monascaclient is available in a venv, add the most common location to the path
-import sys
-sys.path.append('/opt/monasca/lib/python2.7/site-packages')
-
 try:
     from monascaclient import client
     from monascaclient import ksclient
 except ImportError:
-    monascaclient_found = False
+    # In many installs the python-monascaclient is available in a venv, switch to the most common location
+    activate_this = '/opt/monasca/bin/activate_this.py'
+    try:
+        execfile(activate_this, dict(__file__=activate_this))
+        from monascaclient import client
+        from monascaclient import ksclient
+    except ImportError:
+        monascaclient_found = False
+    else:
+        monascaclient_found = True
 else:
     monascaclient_found = True
 
