@@ -113,7 +113,16 @@ try:
     from monascaclient import client
     from monascaclient import ksclient
 except ImportError:
-    monascaclient_found = False
+    # In many installs the python-monascaclient is available in a venv, switch to the most common location
+    activate_this = '/opt/monasca/bin/activate_this.py'
+    try:
+        execfile(activate_this, dict(__file__=activate_this))
+        from monascaclient import client
+        from monascaclient import ksclient
+    except ImportError:
+        monascaclient_found = False
+    else:
+        monascaclient_found = True
 else:
     monascaclient_found = True
 
