@@ -28,3 +28,4 @@
         description: "Time taken to email notifications",
         expression: "avg(monasca.email_time.95percentile) > 2 times 3" }
     - { name: "Zookeeper Average Latency", expression: "avg(zookeeper.avg_latency_sec) > 1 times 3" }
+    - { name: "Zookeeper Connections Count", expression: "zookeeper.connections_count < 5" }
