@@ -17,7 +17,7 @@
     - { name: "Kafka Consumer Lag",
         description: "The specified consumer_group is not keeping up with messages flowing through kafka",
         severity: "MEDIUM",
-        expression: "avg(kafka.consumer_lag) > 100 times 3",
+        expression: "avg(kafka.consumer_lag) > 1000 times 3",
         match_by: ["consumer_group", "hostname"] }
     - { name: "Monasca Agent emit time", description: "Time agent takes to send metrics to the api", expression: "avg(monasca.emit_time_sec) > 2 times 3" }
     - { name: "Monasca Agent collection time", description: "Time agent takes to collect metrics", expression: "avg(monasca.collection_time_sec) > 5 times 3" }
