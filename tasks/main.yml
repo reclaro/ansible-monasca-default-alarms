@@ -1,5 +1,5 @@
 ---
-- name: Setup default email notification method
+- name: Setup default notification method
   monasca_notification_method:
     name: "{{notification_name}}"
     type: "{{notification_type}}"
