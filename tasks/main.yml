@@ -1,9 +1,9 @@
 ---
 - name: Setup default email notification method
   monasca_notification_method:
-    name: "Default Email"
-    type: 'EMAIL'
-    address: "{{default_email}}"
+    name: "{{notification_name}}"
+    type: "{{notification_type}}"
+    address: "{{notification_address}}"
     keystone_url: "{{keystone_url}}"
     keystone_user: "{{keystone_user}}"
     keystone_password: "{{keystone_password}}"
