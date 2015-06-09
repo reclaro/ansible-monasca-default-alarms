@@ -26,3 +26,7 @@
         severity: "HIGH",
         expression: "process.pid_count < 1",
         match_by: ["process_name", "hostname"] }
+    - { name: "Process count interval",
+        description: "Check if the number of processes are included in a specific interval",
+        severity: "HIGH",
+        expression: "process.pid_count >= {{process_count_lower_bound}} and process.pid_count <= {{process_count_lower_bound}}" }

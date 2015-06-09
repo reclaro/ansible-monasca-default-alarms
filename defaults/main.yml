@@ -3,3 +3,5 @@ notification_address: root@localhost
 notification_name: 'Default Email'
 notification_type: EMAIL
 keystone_project:
+process_count_lower_bound: 1
+process_count_upper_bound: 32
